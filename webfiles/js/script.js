@@ -27,6 +27,7 @@ currentDate.innerText = currentTime
 
 form.addEventListener("submit", e => {
     e.preventDefault()
+    console.log(d.getDay());
 
     let adress = ville.value
 
@@ -44,6 +45,7 @@ form.addEventListener("submit", e => {
             let cityName = response[0].name
             let latitude = response[0].coordinates.latitude
             let longitude = response[0].coordinates.longitude
+            console.log(response);
 
 
             fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=auto`)
@@ -62,6 +64,7 @@ form.addEventListener("submit", e => {
 
                     let arrayIndex = hour
 
+                    nextHoursContainer.innerHTML= ''
                     nextHoursContainer.classList.add("active")
 
                     for (let index = 0; index <= 5; index++) {
@@ -74,12 +77,16 @@ form.addEventListener("submit", e => {
                         elDiv = document.createElement("div")
                         elDiv.classList.add("nextHourForecast")
                         elDiv.innerHTML = `
-                    <p>${day}/${month} à ${arrayIndex}:00</p>
-                    <p>${weatherCode(rep.hourly.weathercode[arrayIndex])}</p>
-                    <p>${rep.hourly.temperature_2m[arrayIndex]}°C</p>
-                    <p>${rep.hourly.relativehumidity_2m[arrayIndex]}% d'humidité</p>
-                    <img class="imageWeather" src="${weatherIcon(rep.hourly.weathercode[arrayIndex])}" alt="Icone de prévision météo">
-                    `
+                            <div class='time'>
+                                <p>${date}/${month} à ${arrayIndex}:00</p>
+                                <p>${weatherCode(rep.hourly.weathercode[arrayIndex])}</p>
+                            </div>
+                            <img class="imageWeather" src="${weatherIcon(rep.hourly.weathercode[arrayIndex])}" alt="Icone de prévision météo">
+                            <div class="temp">
+                                <p>${rep.hourly.temperature_2m[arrayIndex]}°C</p>
+                                <p>${rep.hourly.relativehumidity_2m[arrayIndex]}% d'humidité</p>
+                            </div>
+                        `
                         nextHoursContainer.append(elDiv)
                     }
                 })
@@ -143,7 +150,7 @@ function weatherCode(code) {
 function weatherIcon(code) {
     if (code === 0) {
         backGroundImage.style.backgroundImage = "url('https://st3.depositphotos.com/1000152/13529/i/600/depositphotos_135294716-stock-photo-blue-sky-background.jpg')";
-        imageWeather = "../../img/meteo-icons/sun.png"
+        imageWeather = "./img/meteo-icons/sun.png"
         return imageWeather
     }
     if (code > 0 && code < 4) {
@@ -153,52 +160,52 @@ function weatherIcon(code) {
     }
     if (code > 45 && code < 49) {
         backGroundImage.style.backgroundImage = "url('https://st3.depositphotos.com/2949325/32634/i/450/depositphotos_326344060-stock-photo-dark-foggy-autumn-countriside-view.jpg')";
-        imageWeather = "../../img/meteo-icons/foggy.png"
+        imageWeather = "./img/meteo-icons/foggy.png"
         return imageWeather
     }
     if (code > 50 && code < 56) {
         backGroundImage.style.backgroundImage = "url('https://cdn.futura-sciences.com/cdn-cgi/image/width=1024,quality=50,format=auto/sources/odeur-pluie.jpg')";
-        imageWeather = "../../img/meteo-icons/rain.png"
+        imageWeather = "./img/meteo-icons/rain.png"
         return imageWeather
     }
     if (code > 55 && code < 58) {
         backGroundImage.style.backgroundImage = "url('https://cdn.futura-sciences.com/cdn-cgi/image/width=1024,quality=50,format=auto/sources/odeur-pluie.jpg')";
-        imageWeather = "../../img/meteo-icons/rain.png"
+        imageWeather = "./img/meteo-icons/rain.png"
         return imageWeather
     }
     if (code > 60 && code < 68) {
         backGroundImage.style.backgroundImage = "url('https://cdn.futura-sciences.com/cdn-cgi/image/width=1024,quality=50,format=auto/sources/odeur-pluie.jpg')";
-        imageWeather = "../../img/meteo-icons/rainy.png"
+        imageWeather = "./img/meteo-icons/rainy.png"
         return imageWeather
     }
     if (code > 70 && code < 76) {
         backGroundImage.style.backgroundImage = "url('https://cdn.futura-sciences.com/cdn-cgi/image/width=1024,quality=50,format=auto/sources/odeur-pluie.jpg')";
-        imageWeather = "../../img/meteo-icons/rainy.png"
+        imageWeather = "./img/meteo-icons/rainy.png"
         return imageWeather
     }
     if (code === 77) {
         backGroundImage.style.backgroundImage = "url('https://resize-parismatch.lanmedia.fr/var/pm/public/media/image/2022/04/01/15/Les-images-de-la-France-sous-la-neige.jpg?VersionId=LWbX13lKu3RO.NdFuZoeL9I3seWEF2Pz')";
-        imageWeather = "../../img/meteo-icons/snow.png"
+        imageWeather = "./img/meteo-icons/snow.png"
         return imageWeather
     }
     if (code > 79 && code < 83) {
         backGroundImage.style.backgroundImage = "url('https://cdn.futura-sciences.com/cdn-cgi/image/width=1024,quality=50,format=auto/sources/odeur-pluie.jpg')";
-        imageWeather = "../../img/meteo-icons/rainy.png"
+        imageWeather = "./img/meteo-icons/rainy.png"
         return imageWeather
     }
     if (code > 84 && code < 87) {
         backGroundImage.style.backgroundImage = "url('https://resize-parismatch.lanmedia.fr/var/pm/public/media/image/2022/04/01/15/Les-images-de-la-France-sous-la-neige.jpg?VersionId=LWbX13lKu3RO.NdFuZoeL9I3seWEF2Pz')";
-        imageWeather = ".img/meteo-icons/snow.png"
+        imageWeather = "./img/meteo-icons/snow.png"
         return imageWeather
     }
     if (code === 95) {
         backGroundImage.style.backgroundImage = "url('https://img.fotocommunity.com/eclair-de-mon-balcon-cecf85e0-76b4-4f07-9a80-e86396b68b99.jpg?height=1080')";
-        imageWeather = ".img/meteo-icons/thunder.png"
+        imageWeather = "./img/meteo-icons/thunder.png"
         return imageWeather
     }
     if (code > 95 && code < 100) {
         backGroundImage.style.backgroundImage = "url('https://img.fotocommunity.com/eclair-de-mon-balcon-cecf85e0-76b4-4f07-9a80-e86396b68b99.jpg?height=1080')";
-        imageWeather = ".img/meteo-icons/thunder.png"
+        imageWeather = "./img/meteo-icons/thunder.png"
         return imageWeather
     }
 }

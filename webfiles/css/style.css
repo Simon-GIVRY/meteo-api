@@ -54,7 +54,7 @@ main div.forecast{
 }
 
 main div.today{
-    background-color: rgb(122, 107, 151);
+    background-color: rgba(122, 107, 151, 0.75);
     border-radius: 10px;
     padding: 1rem;
     display: flex;
@@ -87,13 +87,64 @@ main div.nextHourForecast{
     justify-content: space-evenly;
     text-align: center;
     margin: 1rem;
+    /* width: fit-content; */
     width: 7rem;
     padding: 1rem ;
     border-radius: 10px;
     background-color: rgb(122, 107, 151);
 }
 
+main div p{
+ margin: 0.5rem;
+} 
+
+
 img.imageWeather{
     margin: 0 auto;
     width: 50px;
+}
+
+@media screen and (max-width:1100px) {
+
+body{
+    overflow:scroll;
+
+}
+
+main{
+    overflow:scroll;
+
+}
+
+main div.nextHoursContainer{
+    flex-direction: column;
+
+
+}
+
+main div.nextHourForecast{
+    flex-direction: row;
+    width:17rem;
+    align-items: center;
+
+}
+
+main div.nextHourForecast div.time p{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    
+}
+
+
+main div.nextHourForecast div.temp{
+text-align: right;
+}
+
+
+main div.time P:last-of-type{
+    width: 80%;
+}
+
+
 }
