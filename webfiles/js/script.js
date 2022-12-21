@@ -53,7 +53,7 @@ form.addEventListener("submit", e => {
             .then(rep => {
                 elCity.innerText = cityName
                 
-                console.log(rep);
+                    nextHoursContainer.innerHTML = ''
                     currentDate.innerText = currentTime
 
                     let currentTemp = rep.hourly.temperature_2m[hour] + "°C"
